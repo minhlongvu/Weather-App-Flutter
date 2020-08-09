@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clima/services/location.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:clima/services/networking.dart';
 
 const apiKey = '44e664d970e6c4fa49fd97e0d97e91c9';
 
@@ -17,37 +16,23 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  void getLocation() async {
+  void getLocationData() async {
+    // Using geolocation package to get latitude and longitude
     Location location = Location();
-
     await location.getCurrentLocation();
-
     latitude = location.latitude;
     longitude = location.longitude;
 
-    getData();
-  }
-
-  void getData() async {
-    http.Response response = await http.get(
+    // put that into our url
+    NetworkHelper networkHelper = NetworkHelper(
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
-    if (response.statusCode == 200) {
-      String data = response.body;
-      var decodedData = jsonDecode(data);
 
-      double temperature = decodedData['main']['temp'];
-      int conditionNumber = decodedData['weather'][0]['id'];
-      String cityName = decodedData['name'];
-
-      print(temperature);
-      print(conditionNumber);
-      print(cityName);
-    } else {
-      print(response.statusCode);
-    }
+    // use the networkHelper to get the data by networking with the openWeather url that we provided
+    // getData method in networking.dart checks status code and returns jsonDecoded data
+    var weatherData = await networkHelper.getData();
   }
 
   @override
