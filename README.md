@@ -1,8 +1,9 @@
 # Clima ☁
 
 A weather app I coded using Flutter/Dart and based off starter code from [Angela Yu's (in collaboration with the Google Flutter team) Flutter course](https://www.udemy.com/course/flutter-bootcamp-with-dart/).
+You'll be able to check your current location's weather conditions along with any city you can think of!
 
-Inspired by the beautiful designs made by [Olia Gozha](https://dribbble.com/shots/4663154-). By the end of the module, you'll be able to find out the live weather data in the current location of the device as well as the weather for any city you can think of!
+Inspired by the beautiful designs made by [Olia Gozha](https://dribbble.com/shots/4663154-). 
 
 ![Finished App](https://github.com/londonappbrewery/Images/blob/master/clima-demo.gif)
 
